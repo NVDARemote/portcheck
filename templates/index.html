@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+<title>
+PortCheck: Find out if a port is Open
+</title>
+<script>
+function check_port() {
+	var port = document.getElementById('port').value;
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "/port/" + port, true);
+	xhr.onload = function (e) {
+		if (xhr.readyState === 4) {
+			if (xhr.status === 200) {
+				data = JSON.parse(xhr.response);
+				document.getElementById("status").innerHTML = "The port " + data.port + " on IP " + data.host + " is " + (data.open ? "open" : "closed") + ".";
+			}
+		}
+	}
+	xhr.send();
+	return false;
+}
+</script>
+</head>
+
+<body>
+<h1>
+Quickly check to see if a port is open
+</h1>
+<p>
+Use this website to quickly determine if a port is reachable from the open Internet on your local machine
+</p>
+<p>
+Unlike other port checker services, we offer an easy-to-use programmatic API, and access to your IP address in the returned result, making it very easy to quickly check a server running on a user's machine, for instance
+</p>
+
+<form action="#" onsubmit="return check_port();">
+<label>
+Port:
+<input type="text" name="port" id="port"/>
+</label>
+
+<input type="submit" value="Check!"/>
+</form>
+
+
+<div id="status" aria-live="polite">
+</div>
+
+</body>
+</html>

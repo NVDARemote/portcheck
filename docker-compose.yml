@@ -1,0 +1,8 @@
+version: "3.9"
+
+services:
+  portcheck:
+    build: "."
+    image: "portcheck:latest"
+    ports:
+      - "8080:8080"
