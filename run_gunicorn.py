@@ -1,6 +1,6 @@
 import os
 import logging
-from werkzeug.contrib.fixers import ProxyFix
+from werkzeug.middleware.proxy_fix import ProxyFix
 from portcheck import app
 
 
